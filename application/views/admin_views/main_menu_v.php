@@ -24,12 +24,12 @@ if ($active_menu == 'driver') {
 ?>"><a href="<?php echo base_url('admin/driver'); ?>"><i class="fa fa-file-text-o "></i> <span> Driver</span></a></li>
 
 
-<li class="<?php
+<!--<li class="<?php
 if ($active_menu == 'vehicle') {
     echo 'active';
 }
 ?>"><a href="<?php echo base_url('admin/vehicle'); ?>"><i class="fa fa-file-text-o "></i> <span> Vehicle</span></a></li>
-
+-->
 
 
 
