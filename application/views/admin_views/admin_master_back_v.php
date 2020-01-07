@@ -1,443 +1,192 @@
+
+application/x-httpd-php dashboard_v.php ( PHP script text )
+
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 ?>
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
---> 
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>C2c- <?php echo $title; ?></title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url(); ?>assets/backend/img/favicon.png">
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/plugins/datepicker/datepicker3.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/plugins/select2/select2.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/dist/css/AdminLTE.min.css">
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/dist/css/skins/_all-skins.min.css">
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/plugins/datatables/dataTables.bootstrap.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/custom/css/style.css">
-    <link href="<?php echo base_url(); ?>assets/backend/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
-   
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
-        <!-- Main Header -->
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="<?php echo base_url('dashboard'); ?>" class="logo"> 
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>C2c</b></span>
-            </a>
-            <!-- Header Navbar -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-                <!-- Navbar Right Menu -->
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-          
-                        <?php
-                        $avatar = $this->session->userdata('admin_avatar');
-                        if (!empty($avatar)) {
-                            $profile_picture = base_url('assets/uploaded_files/profile_img/resize/' . $avatar);
-                        } else {
-                            $profile_picture = base_url('assets/backend/dist/img/user4-128x128.jpg');
-                        }
-                        ?>
-                        <li class="dropdown user user-menu">
-                            <!-- Menu Toggle Button -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!-- The user image in the navbar-->
-                                <img src="<?php echo $profile_picture; ?>" class="user-image" alt="User Image">
-                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">
-                                    <?php echo $full_name = $this->session->userdata('admin_name'); ?>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                               
-                                <li class="user-header">
-                                    <img src="<?php echo $profile_picture; ?>" class="img-circle" alt="User Image">
-                                    <p>
-                                        <?php echo $full_name; ?>
-                                        <small>Member since <?php echo date("d F Y", strtotime($this->session->userdata('date_added'))); ?></small>
-                                    </p>
-                                </li>
-                          
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="<?php echo base_url('profile'); ?>" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="<?php echo base_url('logout'); ?>" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="<?php echo $profile_picture; ?>" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p><?php echo $full_name; ?></p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
-           
-            <ul class="sidebar-menu">
-                <?php echo $main_menu; ?>
-            </ul>
-            <!-- /.sidebar-menu -->
-        </section>
-        <!-- /.sidebar -->
-    </aside>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <?php echo $main_content; ?>
-    </div>
-    <!-- /.content-wrapper -->
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-            <!--Anything you want-->
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2019 <a href="http://c2c.vrok.in/" target="_blank">c2c</a>.</strong> All rights reserved.
-    </footer>
-    <!-- Control Sidebar -->
-   
-   
-            
-        
-         <?php
-         $success = $this->session->userdata('success');
-         $exception = $this->session->userdata('exception');
-         if (!empty($success)) {
-            echo "<div class='col-xs-6 col-sm-6 col-md-2 alert bootstrap-growl-bottom-right alert-success' id='message_box' style='position: fixed; margin: 0px; z-index: 1031; bottom: 60px; right: 20px;'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button><i class='icon fa fa-check'></i> " . $success . "</div>";
-            $this->session->unset_userdata('success');
-        } elseif (!empty($exception)) {
-            echo "<div class='col-xs-6 col-sm-6 col-md-2 alert bootstrap-growl-bottom-right alert-warning' id='message_box' style='position: fixed; margin: 0px; z-index: 1031; bottom: 60px; right: 20px;'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button><i class='icon fa fa-warning'></i>" . $exception . "</div>";
-            $this->session->unset_userdata('exception');
-        }
-        ?>
-        <!-- REQUIRED JS SCRIPTS -->
-        <!-- jQuery 2.2.3 -->
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/jQuery/jquery-2.2.3.min.js"></script>
-        <!-- Bootstrap 3.3.6 -->
-        <script src="<?php echo base_url(); ?>assets/backend/bootstrap/js/bootstrap.min.js"></script>
-        <!-- Select2 -->
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/select2/select2.full.min.js"></script>
-        <!-- InputMask -->
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/input-mask/jquery.inputmask.js"></script>
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-        <!-- DataTables -->
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <!-- date-range-picker -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/daterangepicker/daterangepicker.js"></script>
-        <!-- bootstrap datepicker -->
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/datepicker/bootstrap-datepicker.js"></script>
-        <!-- AdminLTE App -->
-        <script src="<?php echo base_url(); ?>assets/backend/dist/js/app.min.js"></script>
-        <!-- CK Editor -->
+<style>
+    .col-md-3 {
+    width: 22%;
+}
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.media {
     
+    margin-bottom: -7px;
+}
+.gradient-1:hover{ box-shadow: 0 8px 16px 0 rgba(0,0,0,2);}
+.gradient-2:hover{ box-shadow: 0 8px 16px 0 rgba(0,0,0,2);}
+.gradient-3:hover{ box-shadow: 0 8px 16px 0 rgba(0,0,0,2);}
+.gradient-4:hover{ box-shadow: 0 8px 16px 0 rgba(0,0,0,2);}
+</style>
+
+<!-- Content Header (Page header) -->
+
+<section class="content-header">
+
+  <h1>
+      Dashboard
+  </h1>
+
+  <ol class="breadcrumb">
+
+    <li><a href="<?php echo base_url('dashboard'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+
+    <li class="active">Dashboard</li>
+
+  </ol>
+
+</section>
+
+<!-- Main content -->
+
+<section class="content">
+
+  <!-- Small boxes (Stat box) -->
   
-    <script src="<?php echo base_url(); ?>assets/backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> 
-       
-        <script src="<?php echo base_url(); ?>assets/backend/custom/js/custom_allert_box/jquery.confirm.js"></script>
-        <script src="<?php echo base_url(); ?>assets/backend/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-       <script src="<?php echo base_url(); ?>assets/backend/plugins/validation/jquery.validate.min.js"></script> 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQbRQP-Y2V1k4H_1PjzvHjsIIWGpmwsPs&sensor&libraries=places&callback=initMap"
-    async defer></script>
-    <input type="hidden" id="googleidsearch" value="">
-    <script> 
-    $(document).ready(function(){ 
-    $(".geo-address").one("keyup", function() { 
-      $("#googleidsearch").val(this.id);
-      initMap();
-    });
-  });
-     var map, places, infoWindow;
-     var markers = [];
-     var autocomplete;
-     var countryRestrict = {'country': 'us'};
-     var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
-     var hostnameRegexp = new RegExp('^https?://.+?/');
-     var countries = {
-        'us': {
-          center: {lat: 37.1, lng: -95.7},
-          zoom: 3
-      },
-  };
-  function initMap() {
-   /* document.getElementById('autocomplete')) */
-   var idsearch=document.getElementById('googleidsearch').value; 
-   autocomplete = new google.maps.places.Autocomplete(
-       (
-          document.getElementById(''+idsearch+'')), {
-         /*  types: ['(cities)'], */
-          componentRestrictions: countryRestrict
-      });  
-}
-function search() {
-    var search = {
-      bounds: map.getBounds(),
-      types: ['lodging']
-  };
-  places.nearbySearch(search, function(results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        clearResults();
-        clearMarkers();
-        for (var i = 0; i < results.length; i++) {
-          var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-          var markerIcon = MARKER_PATH + markerLetter + '.png';
-          markers[i] = new google.maps.Marker({
-            position: results[i].geometry.location,
-            animation: google.maps.Animation.DROP,
-            icon: markerIcon
-        });
-          markers[i].placeResult = results[i];
-          google.maps.event.addListener(markers[i], 'click', showInfoWindow);
-          setTimeout(dropMarker(i), i * 100);
-          addResult(results[i], i);
-      }
-  }
-});
-}
-function clearMarkers() {
-    for (var i = 0; i < markers.length; i++) {
-      if (markers[i]) {
-        markers[i].setMap(null);
-    }
-}
-markers = [];
-}
-function setAutocompleteCountry() {
-    var country = document.getElementById('country').value;
-    if (country == 'all') {
-      autocomplete.setComponentRestrictions({'country': []});
-      map.setCenter({lat: 15, lng: 0});
-      map.setZoom(2);
-  } else {
-      autocomplete.setComponentRestrictions({'country': country});
-      map.setCenter(countries[country].center);
-      map.setZoom(countries[country].zoom);
-  }
-} 
-</script>
-<!-- geo-address -->
-<script>
- $(".form-validation").validate({ 
- }); 
- $(".form-validation-event").validate({  
-     rules: { 
-         end_date: {
-            required: function(elem)
-            {      
-                if($('input[name="recurring"]:checked')){
-                    return true;
-                }else{
-                    return false;
-                } 
-            }  
-        },
-    },
-    messages: { 
-     end_date: {
-        required: "This field is required.", 
-    }, 
-}
-}); 
-</script>
-<!-- validation -->
-<script>
-    $(".check_delete").confirm({
-        title: "<i class='fa fa-warning'></i> Delete confirmation !",
-        text: "Are you really sure, you want to delete this ?",
-        confirmButton: "<i class='fa fa-check'></i> Ok",
-        cancelButton: "<i class='fa fa-remove'></i> Cancel",
-        confirmButtonClass: "btn-success",
-        cancelButtonClass: "btn-danger"
-    });
-</script>
-<!-- For fadeout notifications -->
-<script>
-    $(document).ready(function () {
-        $("#message_box").fadeOut(4000);
-    });
-</script>
-<!-- For DataTable -->
-<script>
-    $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": false,
-            "info": true,
-            "autoWidth": false
-        });
-    });
-    $(function () {
-        $( ".tagsinput,.bootstrap-tagsinput input" ).keyup(function() {  
-         $(this).parents('.c-p-related').find('.tags-btn').html('<div class="selectize-dropdown form-control tag-input multi plugin-remove_button" style= > <div class="selectize-dropdown-content"> <div data-selectable="" class="create">Add keyword <strong>'+$(this).val()+'</strong>…</div> </div> </div>');
-     });
-        $( ".tagsinput,.bootstrap-tagsinput input" ).focusout(function() {
-         $(this).parents('.c-p-related').find('.tags-btn').html('');
-     });
-    });
-</script>
-<!-- For Date Picker -->
-<script>
-    /* format: "yyyy-mm-dd" */
-    $(function () {
-            //Initialize Select2 Elements
-            $(".select2").select2();
-            //Date picker
-            $('#datepicker,.datepicker').datepicker({
-                autoclose: true,
-                format: "yyyy-mm-dd"
-            });
-            //Date picker
-            $('#datepicker2,.datepicker2').datepicker({
-                autoclose: true,
-                format: "yyyy-mm-dd"
-            });
-        });
-</script>
-        <!-- For Editor -->
-    <script>
-        $(function () {
-           if($('#editor1').length){
-            CKEDITOR.replace('editor1'); 
-            $(".textarea").wysihtml5();
-        }
-    });
-   
-</script>
+<div class="container-fluid mt-3">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-1">
+                            <div class="card-body">
+                                 <div class="d-inline-block">
+                                    <h2 class="text-white"><?php echo $upcoming; ?></h2>
+                                    <p class="text-white mb-0">Upcoming Trip</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-2">
+                            <div class="card-body">
+                                <div class="d-inline-block">
+                                    <h2 class="text-white"><?php echo $ongoing; ?></h2>
+                                    <p class="text-white mb-0">Ongoing Trip</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-3">
+                            <div class="card-body">
+                                <div class="d-inline-block">
+                                    <h2 class="text-white"><?php echo $completed; ?></h2>
+                                    <p class="text-white mb-0">Completed Trip</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-4">
+                            <div class="card-body">
+                                 <div class="d-inline-block">
+                                    <h2 class="text-white"><?php echo $cancel; ?></h2>
+                                    <p class="text-white mb-0">Cancel Trip</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
   
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-   <script>
-      $('#content').summernote({
-        placeholder : "Content",
-        tabsize: 2,
-        height: 800, 
-      }); 
-    $('#content_message').summernote({
-        placeholder : "Content",
-        tabsize: 2,
-        height: 400, 
-      }); 
-    </script>
-    <script>
-   
-    </script>
-    <script>
-        function easyFriendlyUrl(strToReplace, target) {
-         var strToReplace=strToReplace.toString()
-         .normalize('NFD')                
-         .replace(/[\u0300-\u036f]/g,'') 
-         .replace(/\s+/g,'-')            
-         .toLowerCase()                  
-         .replace(/&/g,'-and-')          
-         .replace(/[^a-z0-9\-]/g,'')   
-         .replace(/-+/g,'-')              
-         .replace(/^-*/,'')              
-         .replace(/-*$/,'');   
-         document.getElementById(target).value = strToReplace.toLowerCase(); 
-     }
-   function easyFriendlyUrl_2(strToReplace, target) {
-         var strToReplace=strToReplace.toString()
-         .normalize('NFD')                
-         .replace(/[\u0300-\u036f]/g,'') 
-         .replace(/\s+/g,'-')            
-         .toLowerCase()                  
-         .replace(/&/g,'-and-')          
-         .replace(/[^a-z0-9\-]/g,'')   
-         .replace(/-+/g,'-')              
-         .replace(/^-*/,'')              
-         .replace(/-*$/,'');   
-         var val=document.getElementById(target).value;
-     if(val==""){
-     document.getElementById(target).value = strToReplace.toLowerCase(); 
-     }
-     }
- </script>
-<script src="https://farbelous.io/bootstrap-colorpicker/v2/dist/js/bootstrap-colorpicker.js"></script> 
-<link href="https://farbelous.io/bootstrap-colorpicker/v2/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
-<script>
-$(function() {
-$('#cp2').colorpicker({
-format: "hex",
-});
-$('#cp1').colorpicker({
-format: "hex",
-});
-});
-function imgdel_S3(id,imgname){ 
-  var form_data = new FormData();                  
-      form_data.append('id', id);
-    form_data.append('imgname', imgname);
- $('#ajaximg_'+id+'').hide('slow');
-    $('#ajaxinput_'+id+'').remove();
-    $('#ajaxurl_'+id+'').remove(); 
-      $.ajax({
-        url: '<?php echo base_url('ajax/remove_image'); ?>', 
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form_data,                         
-        type: 'post',
-        success: function(php_script_response){   
-      }
-    }); 
-  }
- $(function() { 
-  $(document).on("change", '.col-is-featured', function() {
-    var variable = $('input[name=gallery_featured]:checked').val(); 
-    if (typeof variable  != 'undefined') {
-      $('.col-is-featured').prop('checked', false);
-      $(this).prop('checked', true);
-    }
-  })
-}); 
-</script>
-</body>
-</html> 
+  <!-------------------------->
+
+  <div class="row">
+ <div class="col-md-6 col-md-12">
+                            <div class="card">
+                                <div style="padding-bottom: 59px;" class="card-body">
+                                    <h4 class="card-title">Order Summary</h4>
+                                    <div id="morris-bar-chart" style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                        <svg height="342" width="100%" version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; left: -0.953125px; top: -0.46875px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.2.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="32.859375" y="303" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#000000" d="M45.359375,303H425.094" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="32.859375" y="233.5" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">25</tspan></text><path fill="none" stroke="#000000" d="M45.359375,233.5H425.094" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="32.859375" y="164" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">50</tspan></text><path fill="none" stroke="#000000" d="M45.359375,164H425.094" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="32.859375" y="94.50000000000003" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4.000000000000028" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">75</tspan></text><path fill="none" stroke="#000000" d="M45.359375,94.50000000000003H425.094" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="32.859375" y="25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">100</tspan></text><path fill="none" stroke="#000000" d="M45.359375,25H425.094" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="397.9700982142857" y="315.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2022</tspan></text><text x="289.4744910714286" y="315.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2020</tspan></text><text x="180.97888392857143" y="315.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2018</tspan></text><text x="72.48327678571428" y="315.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2016</tspan></text><rect x="52.14035044642857" y="25" width="11.561950892857142" height="278" rx="0" ry="0" fill="#fc6c8e" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="66.70230133928571" y="52.80000000000001" width="11.561950892857142" height="250.2" rx="0" ry="0" fill="#7571f9" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="106.38815401785713" y="94.50000000000003" width="11.561950892857142" height="208.49999999999997" rx="0" ry="0" fill="#fc6c8e" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="120.95010491071427" y="122.30000000000001" width="11.561950892857142" height="180.7" rx="0" ry="0" fill="#7571f9" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="160.63595758928568" y="164" width="11.561950892857142" height="139" rx="0" ry="0" fill="#fc6c8e" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="175.19790848214282" y="191.8" width="11.561950892857142" height="111.19999999999999" rx="0" ry="0" fill="#7571f9" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="214.8837611607143" y="94.50000000000003" width="11.561950892857142" height="208.49999999999997" rx="0" ry="0" fill="#fc6c8e" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="229.44571205357144" y="122.30000000000001" width="11.561950892857142" height="180.7" rx="0" ry="0" fill="#7571f9" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="269.1315647321428" y="164" width="11.561950892857142" height="139" rx="0" ry="0" fill="#fc6c8e" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="283.693515625" y="191.8" width="11.561950892857142" height="111.19999999999999" rx="0" ry="0" fill="#7571f9" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="323.3793683035714" y="94.50000000000003" width="11.561950892857142" height="208.49999999999997" rx="0" ry="0" fill="#fc6c8e" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="337.9413191964286" y="122.30000000000001" width="11.561950892857142" height="180.7" rx="0" ry="0" fill="#7571f9" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="377.627171875" y="25" width="11.561950892857142" height="278" rx="0" ry="0" fill="#fc6c8e" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="392.18912276785716" y="52.80000000000001" width="11.561950892857142" height="250.2" rx="0" ry="0" fill="#7571f9" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect></svg><div class="morris-hover morris-default-style" style="left: 248.615px; top: 117px; display: none;"><div class="morris-hover-row-label">2020</div><div class="morris-hover-point" style="color: #FC6C8E">
+  A:
+  50
+</div><div class="morris-hover-point" style="color: #7571f9">
+  B:
+  40
+</div><div class="morris-hover-point" style="color: #FC6C8E">
+  C:
+  -
+</div></div></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+
+<div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6">
+                        <div  class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Role</h4>
+                               <a style="float: right;  margin-top: -30px;"  href=""> View All</a>
+                                <div  class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 390px;overflow: scroll;"><div id="activity" style="overflow: hidden; width: auto; height: 390px;">
+                                    <div class="media border-bottom-1 pt-3 pb-3">
+                                        <img width="35" src="https://media.gq.com/photos/59f3aaa8820ddf6592b39dcc/master/pass/category-picker-suits.jpg" class="mr-3 rounded-circle">
+                                        <div class="media-body">
+                                            <h5>Admin</h5>
+                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                        </div><span class="text-muted ">Dec 11 ,2019</span>
+                                    </div>
+                                    <div class="media border-bottom-1 pt-3 pb-3">
+                                        <img width="35" src="https://media.gq.com/photos/59f3aaa8820ddf6592b39dcc/master/pass/category-picker-suits.jpg" class="mr-3 rounded-circle">
+                                        <div class="media-body">
+                                            <h5>Customer</h5>
+                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                        </div><span class="text-muted ">Dec 11 ,2019</span>
+                                    </div>
+                                    <div class="media border-bottom-1 pt-3 pb-3">
+                                        <img width="35" src="https://media.gq.com/photos/59f3aaa8820ddf6592b39dcc/master/pass/category-picker-suits.jpg" class="mr-3 rounded-circle">
+                                        <div class="media-body">
+                                            <h5>Driver</h5>
+                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                        </div><span class="text-muted ">Dec 11 ,2019</span>
+                                    </div>
+                                    <div class="media border-bottom-1 pt-3 pb-3">
+                                        <img width="35" src="https://media.gq.com/photos/59f3aaa8820ddf6592b39dcc/master/pass/category-picker-suits.jpg" class="mr-3 rounded-circle">
+                                        <div class="media-body">
+                                            <h5>Milluser</h5>
+                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                        </div><span class="text-muted ">Dec 11 ,2019</span>
+                                    </div>
+                                    <div class="media border-bottom-1 pt-3 pb-3">
+                                        <img width="35" src="https://media.gq.com/photos/59f3aaa8820ddf6592b39dcc/master/pass/category-picker-suits.jpg" class="mr-3 rounded-circle">
+                                        <div class="media-body">
+                                            <h5>Owner</h5>
+                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                        </div><span class="text-muted ">Dec 11 ,2019</span>
+                                    </div>
+                                    <div class="media border-bottom-1 pt-3 pb-3">
+                                        <img width="35" src="https://media.gq.com/photos/59f3aaa8820ddf6592b39dcc/master/pass/category-picker-suits.jpg" class="mr-3 rounded-circle">
+                                        <div class="media-body">
+                                            <h5>ABC</h5>
+                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                        </div><span class="text-muted ">Dec 11 ,2019</span>
+                                    </div>
+                                   
+                                   <br><br>
+                                </div><div class="slimScrollBar" style="background: transparent; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 268.728px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+  </div>
+
+  <!-- /.row -->
+
+ 
+ 
+     </section>
+
+     <!-- /.content -->
+
+ 
+

@@ -5,7 +5,7 @@ class Driver_model extends CI_Model {
         parent::__construct(); 
     }
     private $_users = 'users'; 
-    private $_drive_license = 'drive_license'; 
+    private $_drive_license = 'tbl_drive_license'; 
     
     public function check_login_info() {
         $username_or_email_address = $this->input->post('username_or_email_address', true);
@@ -72,8 +72,22 @@ class Driver_model extends CI_Model {
         return $result->row_array(); 
     } 
     public function get_Dl_by_driver_id($driver_id) { 
-        $result = $this->db->get_where($this->_drive_license, array('User_Id' => $driver_id , 'Status' => 1)); 
+        $result = $this->db->get_where($this->_drive_license, array('d_l_user_id' => $driver_id , 'd_l_status' => 1)); 
         return $result->row_array(); 
+    } 
+    
+    public function get_driver_vehicle_data($driver_id) { 
+         $this->db->select('*') 
+                ->from('users')
+                ->join('tbl_drive_license', 'tbl_drive_license.d_l_user_id = users.Id', 'left')
+                ->join('vehicle', 'vehicle.v_vehicle_driver_id = users.Id', 'left')
+                ->where('users.Id', $driver_id)
+                ->where('Role_Id', 3)
+                ->where('deletion_status', 0)
+                ;
+        $query_result = $this->db->get(); 
+        $result = $query_result->row_array();  
+        return $result;
     } 
 
     public function published_driver_by_id($driver_id) { 
@@ -91,7 +105,7 @@ class Driver_model extends CI_Model {
         return $this->db->affected_rows(); 
     } 
     public function update_driver_dl($driver_dl_id, $data) { 
-        $this->db->update($this->_drive_license, $data, array('Id' => $driver_dl_id)); 
+        $this->db->update($this->_drive_license, $data, array('d_l_user_id' => $driver_dl_id)); 
         return $this->db->affected_rows(); 
     } 
 	

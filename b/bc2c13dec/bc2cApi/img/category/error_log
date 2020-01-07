@@ -1,5 +1,0 @@
-[05-Mar-2019 16:46:22 UTC] PHP Warning:  include(lib/database.php): failed to open stream: No such file or directory in /home/kxf36lxlqoyf/public_html/demo/education/img/category/text.php on line 3
-[05-Mar-2019 16:46:22 UTC] PHP Warning:  include(): Failed opening 'lib/database.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/kxf36lxlqoyf/public_html/demo/education/img/category/text.php on line 3
-[05-Mar-2019 16:46:22 UTC] PHP Notice:  Undefined index: req in /home/kxf36lxlqoyf/public_html/demo/education/img/category/text.php on line 59
-[05-Mar-2019 16:46:46 UTC] PHP Warning:  include(lib/database.php): failed to open stream: No such file or directory in /home/kxf36lxlqoyf/public_html/demo/education/img/category/text.php on line 3
-[05-Mar-2019 16:46:46 UTC] PHP Warning:  include(): Failed opening 'lib/database.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/kxf36lxlqoyf/public_html/demo/education/img/category/text.php on line 3

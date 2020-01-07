@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     
                 </div>
                     
-                 <div class="row">
+                <div class="row">
                      
                      <div class="col-md-6">
                         <div class="form-group">
@@ -94,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                     </div>
-                    <div class="row">
+                <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="Color">Vehicle Color </label>
@@ -117,10 +117,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     </div>
                     
-                    
-                    
-                    </div>
-                   
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -142,7 +138,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
                 
-                 <div class="row">
+                <div class="row">
                      <div class="col-md-12">
                         <div class="form-group">
                             <label for="Details">Vehicle Detail</label>
@@ -157,14 +153,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
-            
-            
-            
-                
-                
-                <!-- /.row -->
-           
-            <!-- /.box-body -->
+                    
+            </div>
             <div class="box-footer">
                 <a href="<?php echo base_url('admin/vehicle'); ?>" class="btn btn-danger" data-toggle="tooltip" title="Go back"><i class="fa fa-remove"></i> Cancel</a>
                 <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Info</button>

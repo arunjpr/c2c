@@ -28,16 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-md-12">
                 <div class="col-lg-2 col-md-3">
-                    <!--<img src="<?php echo base_url() ?>/assets/backend/img/rider/<?php echo $user_data['Image'] ?>" class="img-responsive img-thumbnail">-->
-                    <div class="card" style="width: 18rem;">
-  <img src="https://pbs.twimg.com/media/DY4qiZxWAAAiUIZ.jpg"  style="border: 2px #d2d2d2 solid; padding: 4px;"    width="154px" class="card-img-top" alt="...">
-  
-</div>
-<br>
-<div class="card" style="width: 18rem;">
-  <img src="https://static1.fashionbeans.com/wp-content/uploads/2017/10/best-mens-medium-length-hairstyles2.jpg"     width="154px" class="card-img-top" alt="...">
-  
-</div>
+                    <img src="<?php echo base_url() ?>/assets/backend/img/rider/<?php echo $user_data['Image'] ?>" class="img-responsive img-thumbnail">
                 </div>
 <div class="table-responsive panel">
     <table class="table">

@@ -55,9 +55,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="help-block error-message"><?php echo form_error('Status'); ?></span>
                         </div>
                     </div>
-                    </div>
                     
-                    <div class="row">
+                    
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Gender">Gender Type</label>
@@ -82,9 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="help-block error-message"><?php echo form_error('Mobile'); ?></span>
                         </div>
                     </div>
-                    </div>
-                    
-                    <div class="row">
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Address">Address</label>
